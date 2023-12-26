@@ -24,6 +24,25 @@ echo $players;
 
 ## Supported operating systems
 
+:white_check_mark: - It works, it's been tested.
+:red_circle: - McGet is not supported on this operating system
+:yellow_circle: - Probably mcget should work on this system, however this has not been tested.
+
+| Operating System | Version | Supported          |
+| ---------------- | ------- | ------------------ |
+| Windows          | 11      | :white_check_mark: |
+|                  | 10      | :white_check_mark: |
+|                  | 8.1     | :yellow_circle:    |
+|                  | 8       | :yellow_circle:    |
+|                  | 7       | :white_check_mark: |
+|                  | Vista   | :yellow_circle: \* |
+|                  | XP      | :yellow_circle: \* |
+| Ubuntu           | 14.04   | :red_circle:       |
+|                  | 16.04   | :red_circle:       |
+|                  | 18.04   | :red_circle:       |
+|                  | 20.04   | :yellow_circle:    |
+|                  | 22.04   | :yellow_circle:    |
+
 ## Contributors ✨
 
 coming soon

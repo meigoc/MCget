@@ -48,6 +48,22 @@ Run McGet v2.0.jar
 ## Version History
 [![tag](https://4.vercel.app/static/tag/555/v2.0BETABuild26122023_02/84bf96?icon=tag)](../../releases)
 
+| Date             | Version        | Build                     | Built on MeigoAPI    | Language           |
+| ---------------- | -------------- | ------------------------- | -------------------- | ------------------ |
+| 27.12.2023       | v2.0 :moneybag:| 27122023_01               | MeigoAPI v5.0 :fire: | PHP: 5.6.99        |
+| 26.12.2023       | v2.0 BETA      | 26122023_04               | MeigoAPI v4.1 & v4.9 | PHP: 5.6.99        |
+| 26.12.2023       | v2.0 BETA      | 26122023_03               | MeigoAPI v4.1 & v4.9 | PHP: 5.6.99        |
+| 26.12.2023       | v2.0 BETA      | 26122023_02               | MeigoAPI v4.1 & v4.9 | PHP: 5.6.99        |
+| 25.12.2023       | v2.0 BETA      | 25122023_01               | MeigoAPI v4.1 & v4.9 | PHP: 5.6.99        |
+| 31.08.2023       | v1.7.1 :fire:  | 31082023_01               | MeigoAPI v4.1        | PHP: 5.6.99        |
+| 30.08.2023       | v1.7 :fire:    | 30082023_05               | MeigoAPI v4.1        | PHP: 5.6.99        |
+| 30.08.2023       | v1.6           | 30082023_04               | MeigoAPI v4.0        | PHP: 5.6.99        |
+| 30.08.2023       | v1.5           | 30082023_03               | MeigoAPI v4.0        | PHP: 5.6.99        |
+| 30.08.2023       | v1.4.1 :fire:  | 30082023_02               | MeigoAPI v3.0        | PHP: 5.6.99        |
+| 30.08.2023       | v1.4           | 30082023_01               | MeigoAPI v2.0        | PHP: 5.6.99        |
+| 29.08.2023       | v1.2           | 29082023_03               | Does not have an API | PHP: 5.6.99        |
+| 29.08.2023       | v1.1           | 29082023_02               | Does not have an API | PHP: 5.6.99        |
+| 29.08.2023       | v1.0           | 29082023_01               | Does not have an API | PHP: 5.6.99        |
 ## Contributors ✨
 
 coming soon

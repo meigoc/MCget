@@ -13,11 +13,10 @@ coming soon
 
 Player list
 ```php
-<?php
-$players = file_get_contents("https://api.mgo.lol/meigoapi/49/players/list/?ip=mon.skybars.net");
-
-echo $players;
-?>
+$status = json_decode(file_get_contents("http://api.mgo.lol/meigoapi/50/json.php?ip=mon.skybars.net"));
+   foreach ($status->players->list as $player) {
+	    echo $player.'\n';
+   }
 ```
 
 ## Install
@@ -46,7 +45,7 @@ Run McGet v2.0.jar
 |                  | 22.04   | :yellow_circle:    |
 
 ## Version History
-[![tag](https://4.vercel.app/static/tag/555/v2.0BETABuild26122023_02/84bf96?icon=tag)](../../releases)
+[![tag](https://4.vercel.app/static/tag/555/v2.0/84bf96?icon=tag)](../../releases)
 
 | Date             | Version        | Build                     | Built on MeigoAPI    | Language           | Size of the update |
 | ---------------- | -------------- | ------------------------- | -------------------- | ------------------ | ------------------ |

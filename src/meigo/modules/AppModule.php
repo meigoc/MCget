@@ -16,10 +16,15 @@ class AppModule extends AbstractModule
         $result = (new Process(['cmd.exe', '/c chcp 65001']))->start()->getInput()->readFully();
         $result = str::decode($result, 'cp866'); //  командная строка windows работает с кодировкой OEM-866
     
-        echo "█▀▄▀█ █▀▀ █▀▀ █▀▀ ▀█▀   █░█ ▄█ ░ █▀█\n";
-        echo "█░▀░█ █▄▄ █▄█ ██▄ ░█░   ▀▄▀ ░█ ▄ ▀▀█\n";
-        echo "McGet v1.9 | Build 29122023_01 | Developed by Meigo\n";
+        echo "█▀▄▀█ █▀▀ █▀▀ █▀▀ ▀█▀   █░█ ▄█ ░ █▀█ ░ ▄█\n";
+        echo "█░▀░█ █▄▄ █▄█ ██▄ ░█░   ▀▄▀ ░█ ▄ ▀▀█ ▄ ░█\n";
+        echo "McGet v1.9.1 | Build 29122023_02 | Developed by Meigo\n";
+        $upd = file_get_contents("http://api.mgo.lol/mcget/updates/2912202302/i.txt");
+        if ($upd == "2912202302"){
         echo "\n";
+        } else {
+            echo "==============================================\nA new update has been found! Download it from our github. For more information use the command.\n==============================================\n";
+        }
         echo "* Github: @meigoc\n";
         echo "* Discord: @glebbb\n";
         echo "* Repository: github.com/meigoc/MCget\n\n";
@@ -29,6 +34,9 @@ class AppModule extends AbstractModule
         echo "   Example: request bedrock play.nethergames.net\n";
         echo "   Example: request java hypixel.net icon\n";
         echo "& exit\n";
+        if ($upd != "2912202302"){
+            echo "& infoupdate\n";
+        }
         
         
     
@@ -41,7 +49,7 @@ class AppModule extends AbstractModule
                 unset($cmd[0]);
                 echo call_user_func_array([$this, $method], $cmd);
             } else { // неизвестная команда
-                echo "Unsupported command привет";
+                echo "Unsupported command";
             }
             
             echo "\n";
@@ -127,6 +135,27 @@ class AppModule extends AbstractModule
         
         
     }
+  
+    // Extra commands
+    // $upd = file_get_contents("http://api.mgo.lol/mcget/updates/2912202302/i.txt");    
+    
+    /**
+     * Command: infoupdate
+     */
+    function cmdinfoupdate(){
+        $upd = file_get_contents("http://api.mgo.lol/mcget/updates/2912202302/i.txt");
+        if ($upd == "2912202302"){
+            echo "Unsupported command\n";
+        } else {
+            echo "| Receive information about updates...\n";
+            $o = json_decode(file_get_contents("http://api.mgo.lol/mcget/updates/2912202302/info.json"));
+            echo "Build: ".$o->build."\n";
+            echo "Name: ".$o->name."\n";
+            echo "Size: ".$o->size."\n";
+            echo "Description: ".$o->description."\n";
+            
+        }
+    } 
 
     // Basic commands (for developer)
     

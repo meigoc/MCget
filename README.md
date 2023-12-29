@@ -19,6 +19,14 @@ $status = json_decode(file_get_contents("http://api.mgo.lol/meigoapi/50/json.php
    }
 ```
 
+## Bedrock Documentation (MeigoAPI v5.0) [Bedrock]
+
+(Bedrock) Players
+```php
+$a = json_decode(file_get_contents("http://api.mgo.lol/meigoapi/50/bedrock.php?ip=play.nethergames.net"));
+echo "Players: ".$a->players->online."/".$a->players->max."\n";
+```
+
 ## Install
 
 Run McGet v2.0.jar

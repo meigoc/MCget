@@ -1,7 +1,10 @@
 <?php
 namespace meigo\modules;
 
+use jurl;
 use std, gui, framework, meigo;
+use meigo\ini\storage;
+use meigo\minecraft\playerapi;
 
 
 class AppModule extends AbstractModule
@@ -11,16 +14,14 @@ class AppModule extends AbstractModule
      * @event construct 
      */
     function doConstruct(ScriptEvent $e = null)
-    {    
-    	echo "| (chcp 65001) Attempting to set page code 65001 manually...\n";
-        $result = (new Process(['cmd.exe', '/c chcp 65001']))->start()->getInput()->readFully();
-        $result = str::decode($result, 'cp866'); //  командная строка windows работает с кодировкой OEM-866
-    
-        echo "█▀▄▀█ █▀▀ █▀▀ █▀▀ ▀█▀   █░█ ▄█ ░ █▀█ ░ ▄█\n";
-        echo "█░▀░█ █▄▄ █▄█ ██▄ ░█░   ▀▄▀ ░█ ▄ ▀▀█ ▄ ░█\n";
-        echo "McGet v1.9.1 | Build 29122023_02 | Developed by Meigo\n";
-        $upd = file_get_contents("http://api.mgo.lol/mcget/updates/2912202302/i.txt");
-        if ($upd == "2912202302"){
+    {
+        echo "| Loading INI files...\n";
+        (new storage)->initialization(); // initialization ini files
+        echo "█▀▄▀█ █▀▀ █▀▀ █▀▀ ▀█▀   █░█ ▄█ ░ █▀█ ░ ▀█\n";
+        echo "█░▀░█ █▄▄ █▄█ ██▄ ░█░   ▀▄▀ ░█ ▄ ▀▀█ ▄ █▄\n";
+        echo "McGet v1.9.2 | Build 30122023_01 | Developed by Meigo\n";
+        $upd = file_get_contents("http://api.mgo.lol/mcget/updates/3012202301/i.txt");
+        if ($upd == "3012202301"){
         echo "\n";
         } else {
             echo "==============================================\nA new update has been found! Download it from our github. For more information use the command.\n==============================================\n";
@@ -29,13 +30,13 @@ class AppModule extends AbstractModule
         echo "* Discord: @glebbb\n";
         echo "* Repository: github.com/meigoc/MCget\n\n";
         echo "Menu: (Commands)\n\n";
-        echo "& request (java/bedrock) {ip} [icon]\n";
+        echo "& request (java/bedrock/player) {ip} [icon]\n";
         echo "   Example: request java hypixel.net\n";
         echo "   Example: request bedrock play.nethergames.net\n";
         echo "   Example: request java hypixel.net icon\n";
         echo "& exit\n";
-        if ($upd != "2912202302"){
-            echo "& infoupdate\n";
+        if ($upd != "3012202301"){
+            echo "& infoupdate\n& downloadupdate\n";
         }
         
         
@@ -56,6 +57,8 @@ class AppModule extends AbstractModule
         }); 
     }
 
+
+
     // McGet Commands (based on MeigoAPI v5.0)
 
     /**
@@ -70,6 +73,21 @@ class AppModule extends AbstractModule
                 } else {
                 
                 $this->java($args[1]);
+                }
+            break;
+            
+            case 'player':
+                $valid = playerapi::isValidUsername($args[1]);
+                if ($valid == 1){
+                  $uuid = playerapi::getUuid($args[1]);
+                    if ($uuid != null){
+                        $abc = playerapi::getProfile("gleb_petrovich");
+                        echo "& UUID: ".$uuid."\n";
+                        echo "& ID: ".$abc['id']."\n";
+                        echo "& Skin URL: ".playerapi::getSkinUrl($uuid)."\n";
+                    }
+                } else {
+                    echo "| Error\n";
                 }
             break;
             
@@ -98,6 +116,9 @@ class AppModule extends AbstractModule
         // Java Request
         $a = json_decode(file_get_contents("http://api.mgo.lol/meigoapi/50/json.php?ip=".$ip));
         // IP PORT HOSTNAME
+        if ($a->ip == null){
+            echo "### FATAL ERROR MEIGOAPI v5.0 | CODE ERROR: 100\n";
+        } else { // fatal error
         echo "IP: ".$a->ip." (Port: ".$a->port.") ";
         if ($a->hostname != null){
             echo "[".$a->hostname."]";
@@ -117,7 +138,7 @@ class AppModule extends AbstractModule
         }
         
         
-        
+        } // fatal error
         
     }
     
@@ -143,12 +164,12 @@ class AppModule extends AbstractModule
      * Command: infoupdate
      */
     function cmdinfoupdate(){
-        $upd = file_get_contents("http://api.mgo.lol/mcget/updates/2912202302/i.txt");
-        if ($upd == "2912202302"){
+        $upd = file_get_contents("http://api.mgo.lol/mcget/updates/3012202301/i.txt");
+        if ($upd == "3012202301"){
             echo "Unsupported command\n";
         } else {
             echo "| Receive information about updates...\n";
-            $o = json_decode(file_get_contents("http://api.mgo.lol/mcget/updates/2912202302/info.json"));
+            $o = json_decode(file_get_contents("http://api.mgo.lol/mcget/updates/3012202301/info.json"));
             echo "Build: ".$o->build."\n";
             echo "Name: ".$o->name."\n";
             echo "Size: ".$o->size."\n";
@@ -156,6 +177,14 @@ class AppModule extends AbstractModule
             
         }
     } 
+    
+    /**
+     * Command: downloadupdate
+     */
+    function cmddownloadupdate(){
+        $j = new jURLDownloader;
+        echo "Coming soon\n";
+    }
 
     // Basic commands (for developer)
     

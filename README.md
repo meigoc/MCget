@@ -36,7 +36,7 @@ or
 ```yaml
 @echo off
 chcp 65001
-echo V1.9 Downloaded from https://github.com/meigoc/MCget/
+echo V1.9.2 Downloaded from https://github.com/meigoc/MCget/
 echo --------------------
 java -Xmx1024M -jar "McGetRecrafted.jar"
 echo --------------------
@@ -66,7 +66,7 @@ pause
 |                  | 22.04   | :yellow_circle:    |
 
 ## Version History
-[![tag](https://4.vercel.app/static/tag/555/v1.9.1/84bf96?icon=tag)](../../releases)
+[![tag](https://4.vercel.app/static/tag/555/v1.9.2/84bf96?icon=tag)](../../releases)
 
 | Date             | Version        | Build                     | Built on MeigoAPI    | Language           | Size of the update |
 | ---------------- | -------------- | ------------------------- | -------------------- | ------------------ | ------------------ |

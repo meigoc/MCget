@@ -17,14 +17,14 @@ class AppModule extends AbstractModule
     {
         echo "| Loading INI files...\n";
         (new storage)->initialization(); // initialization ini files
-        echo "█▀▄▀█ █▀▀ █▀▀ █▀▀ ▀█▀   █░█ ▄█ ░ █▀█ ░ █░█\n";
-        echo "█░▀░█ █▄▄ █▄█ ██▄ ░█░   ▀▄▀ ░█ ▄ ▀▀█ ▄ ▀▀█\n";
-        echo "McGet v1.9.3 (v1.9.4) | Build 01012024_01 | Developed by Meigo\n";
-        $upd = file_get_contents("http://api.mgo.lol/mcget/updates/0101202401/i.txt");
-        if ($upd == "0101202401"){
+        echo "█▀▄▀█ █▀▀ █▀▀ █▀▀ ▀█▀   █░█ ▄█ ░ █▀█ ░ █▀\n";
+        echo "█░▀░█ █▄▄ █▄█ ██▄ ░█░   ▀▄▀ ░█ ▄ ▀▀█ ▄ ▄█\n";
+        echo "McGet v1.9.5 | Build 02012024_01 | Developed by Meigo\n";
+        $upd = file_get_contents("http://api.mgo.lol/mcget/latestupdate");
+        if ($upd == "02012024_01"){
         echo "\n";
         } else {
-            echo "==============================================\nA new update has been found! Download it from our github. For more information use the command.\n==============================================\n";
+            $this->alertupdate(1);
         }
         echo "* Github: @meigoc\n";
         echo "* Discord: @glebbb\n";
@@ -34,9 +34,10 @@ class AppModule extends AbstractModule
         echo "   Example: request java hypixel.net\n";
         echo "   Example: request bedrock play.nethergames.net\n";
         echo "   Example: request java hypixel.net icon\n";
+        echo "& license\n";
         echo "& exit\n";
         if ($upd != "0101202401"){
-            echo "& infoupdate\n& downloadupdate\n";
+            $this->alertupdate(2);
         }
         
         
@@ -72,8 +73,9 @@ class AppModule extends AbstractModule
                     $this->javaicon($args[1]);
                 } elseif ($args[2] == "monitoring"){
                     $a = file_get_contents("https://monitoringminecraft.ru/chart/".$args[1].".png");
+                    $bbb = file_get_contents("https://monitoringminecraft.ru/chart/198.122.111.png");
                     
-                    if ($a == '<!DOCTYPE html><html lang="ru"><head> <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> <meta name="referrer" content="origin"/> <meta name="robots" content="noindex,nofollow" /> <title>Страница не найдена</title> <link rel="icon" type="image/x-icon" href="/favicon.png" /> <meta name="viewport" content="width=device-width, initial-scale=1"> <meta property="og:image" content="https://monitoringminecraft.ru/images/ig.png"> <link rel="apple-touch-icon" sizes="57x57" href="/themes/.default/media/ico/apple-57x57.png"> <link rel="apple-touch-icon" sizes="72x72" href="/themes/.default/media/ico/apple-72x72.png"> <link rel="apple-touch-icon" sizes="114x114" href="/themes/.default/media/ico/apple-114x114.png"> <link rel="preload" href="/themes/.default/media/fonts/ubuntu-v15-latin_cyrillic-regular.woff2" as="font" type="font/woff2" crossorigin="anonymous"> <link rel="stylesheet" href="/themes/.default/media/css/update.min.css?c"/> </head> <body style="font-family: Ubuntu, Mc Sans Serif"> <div id="wrapper"> <div id="content"> <header><div id="header"> <div> <a href="/" title="Мониторинг серверов Minecraft">Сервера Minecraft</a> <div id="hnav"><nav> <input type="checkbox" name="menu" id="btn-menu" /> <label for="btn-menu">&nbsp;</label> <ul><li><a href="/novie-servera">Новые сервера</a></li><li><a href="/add-server">Добавить сервер</a></li><li><a href="/top">Топ серверов</a></li><li><!--noindex--><a href="/acc" rel="nofollow">Вход в ЛК</a><!--/noindex--></li><li><a href="/skachat.html" style="color:#ffff88">Скачать Майнкрафт</a></li> </ul> </nav></div> </div> </div></header> <div class="shadowi"></div> <div style="margin:0 auto; text-align:center; padding:10px; padding-top:0;"> <div style="padding:20px; padding-top:0px;"> <img src="/themes/.default/media/images/404.jpg" alt="404" style="width:100%; height:auto; max-width:350px;"> <h1>Страница не найдена</h1> <br> <div class="descr">Этой страницы никогда не было, либо она была удалена.<div style="padding-top:10px;"><b>Ищете хороший <a href="/">сервер Майнкрафт</a>?</b><br> Тогда добро пожаловать на крупнейший мониторинг в рунете.</div></div>	</div> </div> <div class="shadow"></div> </div> <div id="footer"> <div> <div> Возникли вопросы? Почитайте <a href="/faq" title="FAQ для владельцев серверов">FAQ</a><br> Или напишите нам: <a href="mailto:monitoringminecraft@gmail.com">monitoringminecraft@gmail.com</a> </div> <div> <!-- Yandex.Metrika informer --> <a href="https://metrika.yandex.ru/stat/?id=21374131&amp;from=informer" target="_blank" rel="nofollow"><img src="https://metrika-informer.com/informer/21374131/3_1_FFFFFFFF_FFFFFFFF_0_pageviews" style="width:88px; height:31px; border:0;" alt="Яндекс.Метрика" title="Яндекс.Метрика: данные за сегодня (просмотры, визиты и уникальные посетители)" class="ym-advanced-informer" data-cid="21374131" data-lang="ru" /></a> <!-- /Yandex.Metrika informer --> <!--LiveInternet counter--><a href="https://www.liveinternet.ru/click" target="_blank"><img id="licnt55F0" width="88" height="31" style="border:0" title="LiveInternet: показано число просмотров за 24 часа, посетителей за 24 часа и за сегодня" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7" alt=""/></a><script>(function(d,s){d.getElementById("licnt55F0").src= "https://counter.yadro.ru/hit?t14.1;r"+escape(d.referrer)+ ((typeof(s)=="undefined")?"":";s"+s.width+"*"+s.height+"*"+ (s.colorDepth?s.colorDepth:s.pixelDepth))+";u"+escape(d.URL)+ ";h"+escape(d.title.substring(0,150))+";"+Math.random()}) (document,screen)</script><!--/LiveInternet--> </div><div class="clear"></div> </div> </div> </div> </body></html>'){
+                    if ($a == $bbb){
                         echo "| Unable to create a chart for this server. You might be using a server with a domain.\n";
                     } else {
                         browse("https://monitoringminecraft.ru/chart/".$args[1].".png");
@@ -108,8 +110,29 @@ class AppModule extends AbstractModule
                 
         }
     } 
+    
+    function cmdlicense(){
+        // license
+        echo "█░░ █ █▀▀ █▀▀ █▄░█ █▀ █▀▀\n";
+        echo "█▄▄ █ █▄▄ ██▄ █░▀█ ▄█ ██▄\n";
+        echo "License @ GNU GENERAL PUBLIC LICENSE v3.0\n";
+        echo "============================================\n";
+        $a = file_get_contents("http://mgo.lol/LICENSE");
+        echo $a."\n";
+        echo "============================================\n";
+    }
 
     // DEV TOOLS
+    
+    function alertupdate($type){
+        if ($type == 1){
+            echo "==============================================\nA new update has been found! Download it from our github. For more information use the command.\n==============================================\n";
+        } elseif ($type == 2){
+            echo "& infoupdate\n& downloadupdate\n";
+        } else {
+            //
+        }
+    }
     
     function javaicon($ip){
         $a = json_decode(file_get_contents("http://api.mgo.lol/meigoapi/50/json.php?ip=".$ip));
@@ -175,18 +198,7 @@ class AppModule extends AbstractModule
      * Command: infoupdate
      */
     function cmdinfoupdate(){
-        $upd = file_get_contents("http://api.mgo.lol/mcget/updates/0101202401/i.txt");
-        if ($upd == "0101202401"){
-            echo "Unsupported command\n";
-        } else {
-            echo "| Receive information about updates...\n";
-            $o = json_decode(file_get_contents("http://api.mgo.lol/mcget/updates/0101202401/info.json"));
-            echo "Build: ".$o->build."\n";
-            echo "Name: ".$o->name."\n";
-            echo "Size: ".$o->size."\n";
-            echo "Description: ".$o->description."\n";
-            
-        }
+        echo "| The command has been temporarily removed, but we will bring it back soon!\n";
     } 
     
     /**

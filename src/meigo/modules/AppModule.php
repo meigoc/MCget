@@ -5,6 +5,7 @@ use jurl;
 use std, gui, framework, meigo;
 use meigo\ini\storage;
 use meigo\minecraft\playerapi;
+use meigo\alert;
 
 
 class AppModule extends AbstractModule
@@ -17,11 +18,11 @@ class AppModule extends AbstractModule
     {
         echo "| Loading INI files...\n";
         (new storage)->initialization(); // initialization ini files
-        echo "█▀▄▀█ █▀▀ █▀▀ █▀▀ ▀█▀   █░█ ▄█ ░ █▀█ ░ █▀\n";
-        echo "█░▀░█ █▄▄ █▄█ ██▄ ░█░   ▀▄▀ ░█ ▄ ▀▀█ ▄ ▄█\n";
-        echo "McGet v1.9.5 | Build 02012024_01 | Developed by Meigo\n";
+        echo "█▀▄▀█ █▀▀ █▀▀ █▀▀ ▀█▀   █░█   ▄█ ░ █▀█ ░ █▄▄\n";
+        echo "█░▀░█ █▄▄ █▄█ ██▄ ░█░   ▀▄▀   ░█ ▄ ▀▀█ ▄ █▄█\n";
+        echo "McGet v1.9.6 | Build 03012024_01 | Developed by Meigo\n";
         $upd = file_get_contents("http://api.mgo.lol/mcget/latestupdate");
-        if ($upd == "02012024_01"){
+        if ($upd == "03012024_01"){
         echo "\n";
         } else {
             $this->alertupdate(1);
@@ -30,15 +31,18 @@ class AppModule extends AbstractModule
         echo "* Discord: @glebbb\n";
         echo "* Repository: github.com/meigoc/MCget\n\n";
         echo "Menu: (Commands)\n\n";
-        echo "& request (java/bedrock/player) {ip} [icon/monitoring]\n";
+        echo "& request (java/bedrock/player/launcher) {ip} [icon/monitoring]\n";
         echo "   Example: request java hypixel.net\n";
         echo "   Example: request bedrock play.nethergames.net\n";
         echo "   Example: request java hypixel.net icon\n";
+        echo "   Example: request player Notch\n";
+        echo "   Example: request launcher vimeworld\n";
         echo "& license\n";
         echo "& exit\n";
-        if ($upd != "0101202401"){
+        if ($upd != "03012024_01"){
             $this->alertupdate(2);
         }
+        (new alert)->alert();
         
         
     
@@ -94,7 +98,7 @@ class AppModule extends AbstractModule
                 if ($valid == 1){
                   $uuid = playerapi::getUuid($args[1]);
                     if ($uuid != null){
-                        $abc = playerapi::getProfile("gleb_petrovich");
+                        $abc = playerapi::getProfile($args[1]);
                         echo "& UUID: ".$uuid."\n";
                         echo "& ID: ".$abc['id']."\n";
                         echo "& Skin URL: ".playerapi::getSkinUrl($uuid)."\n";
@@ -106,6 +110,15 @@ class AppModule extends AbstractModule
             
             case 'bedrock':
                 $this->bedrock($args[1]);
+            break;
+            
+            case 'launcher':
+                if ($args[1] == "vimeworld"){
+                    $this->vimeworld();
+                } else {
+                    echo "The server is unsupported for two reasons. First reason: CloudFlare usage. Second reason: The server does not have a public API.\n";
+                }
+                
             break;
                 
         }
@@ -123,6 +136,17 @@ class AppModule extends AbstractModule
     }
 
     // DEV TOOLS
+    
+    function vimeworld(){
+                $qa = json_decode(file_get_contents("https://api.vimeworld.com/online"));
+                echo "| Current online: ".$qa->total."\n";
+                $qb = json_decode(file_get_contents("https://api.vimeworld.com/online/staff"));
+                echo "| Current online staff: ";
+                foreach ($qb as $qj) {
+               echo $qj.', ';
+                }
+                echo ".\n";
+    }
     
     function alertupdate($type){
         if ($type == 1){

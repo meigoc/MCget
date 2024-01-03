@@ -27,6 +27,14 @@ $a = json_decode(file_get_contents("http://api.mgo.lol/meigoapi/50/bedrock.php?i
 echo "Players: ".$a->players->online."/".$a->players->max."\n";
 ```
 
+## McGet Documentation
+
+Latest Update
+```php
+$a = file_get_contents("https://api.mgo.lol/mcget/latestupdate");
+echo $a;
+```
+
 ## Install
 
 Run start.bat

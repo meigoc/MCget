@@ -66,7 +66,7 @@ pause
 |                  | 22.04   | :yellow_circle:    |
 
 ## Version History
-[![tag](https://4.vercel.app/static/tag/555/v1.9.5/84bf96?icon=tag)](../../releases)
+[![tag](https://4.vercel.app/static/tag/555/v1.9.6/84bf96?icon=tag)](../../releases)
 
 | Date             | Version        | Build                     | Built on MeigoAPI    | Language           | Size of the update |
 | ---------------- | -------------- | ------------------------- | -------------------- | ------------------ | ------------------ |

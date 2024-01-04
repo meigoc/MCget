@@ -1,3 +1,5 @@
+# McGet V2.0 is developed to be 5% complete.
+
 # :bird: McGet - Send a request for server or player data in minecraft.
 [![made-with-jphp](https://img.shields.io/badge/Made_with_JPHP-1f425f)](http://jphp.develnext.org/)
 [![License: GPL v3](https://img.shields.io/github/license/pterodactyl-installer/pterodactyl-installer)](LICENSE)

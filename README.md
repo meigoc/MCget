@@ -1,4 +1,17 @@
-# McGet V2.0 is developed to be 5% complete.
+# McGet V2.0 is developed to be 25% complete.
+
+Current Tasks:
+- ~~Detailed download of the program, including downloading various php scripts with the path.~~ **- DONE**
+- ~~Add the "about" command~~ **- DONE**
+- ~~More beautiful text formatting using different symbols and emoji.~~ **- DONE**
+- ~~Program optimization, code simplification.~~ **- DONE**
+- Get the location of the server, as well as its hosting. **- 85%**
+- Requests to the webserver (webrequest) **- 25%**
+- Detailed information about the player **- 1%**
+- Detailed information about servers **- 95%**
+- Add search history **- 12%**
+- Multilanguage application **- 2%**
+- Ability to create mods using the API. **- 0%**
 
 # :bird: McGet - Send a request for server or player data in minecraft.
 [![made-with-jphp](https://img.shields.io/badge/Made_with_JPHP-1f425f)](http://jphp.develnext.org/)

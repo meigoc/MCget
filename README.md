@@ -11,7 +11,7 @@ Current Tasks:
 - Detailed information about servers **- 95%**
 - Add search history **- 12%**
 - Multilanguage application **- 3%**
-- Ability to create mods using the API. **- 1%**
+- Ability to create mods using the API. **- 10%**
 
 # :bird: McGet - Send a request for server or player data in minecraft.
 [![made-with-jphp](https://img.shields.io/badge/Made_with_JPHP-1f425f)](http://jphp.develnext.org/)

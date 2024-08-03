@@ -18,15 +18,10 @@ class AppModule extends AbstractModule
     {
         echo "| Loading INI files...\n";
         (new storage)->initialization(); // initialization ini files
-        echo "█▀▄▀█ █▀▀ █▀▀ █▀▀ ▀█▀   █░█   ▄█ ░ █▀█ ░ █▄▄\n";
-        echo "█░▀░█ █▄▄ █▄█ ██▄ ░█░   ▀▄▀   ░█ ▄ ▀▀█ ▄ █▄█\n";
-        echo "McGet v1.9.6 | Build 03012024_01 | Developed by Meigo\n";
-        $upd = file_get_contents("http://api.mgo.lol/mcget/latestupdate");
-        if ($upd == "03012024_01"){
-        echo "\n";
-        } else {
-            $this->alertupdate(1);
-        }
+        echo "█▀▄▀█ █▀▀ █▀▀ █▀▀ ▀█▀   █░█ ▄█ ░ █▀█ ░ ▀▀█\n";
+        echo "█░▀░█ █▄▄ █▄█ ██▄ ░█░   ▀▄▀ ░█ ▄ ▀▀█ ▄ ░░█\n";
+        echo "McGet v1.9.7 | Build 03082024_01 | Developed by Meigo\n";
+        echo "Check Updates Disabled!\n";
         echo "* Github: @meigoc\n";
         echo "* Discord: @glebbb\n";
         echo "* Repository: github.com/meigoc/MCget\n\n";
@@ -39,9 +34,6 @@ class AppModule extends AbstractModule
         echo "   Example: request launcher vimeworld\n";
         echo "& license\n";
         echo "& exit\n";
-        if ($upd != "03012024_01"){
-            $this->alertupdate(2);
-        }
         (new alert)->alert();
         
         
@@ -159,11 +151,15 @@ class AppModule extends AbstractModule
     }
     
     function javaicon($ip){
-        $a = json_decode(file_get_contents("http://api.mgo.lol/meigoapi/50/json.php?ip=".$ip));
+        $url = "https://api.mcsrvstat.us/3/".$ip;
+        
+        $ch = curl_init($url);
+        $v = curl_exec($ch);
+        $a = json_decode($v);
         if ($a->icon != null){
             //
             echo "| (".$ip.") Opening the link in your browser...\n";
-            browse("https://run.mgo.lol/icon/?ip=".$ip);
+            //browse("https://run.mgo.lol/icon/?ip=".$ip); don't work
         } else {
             echo "# Error: This server has no icon\n";
         }
@@ -172,7 +168,12 @@ class AppModule extends AbstractModule
     
     function java($ip){
         // Java Request
-        $a = json_decode(file_get_contents("http://api.mgo.lol/meigoapi/50/json.php?ip=".$ip));
+        $url = "https://api.mcsrvstat.us/3/".$ip;
+        
+        $ch = curl_init($url);
+        $v = curl_exec($ch);
+        $a = json_decode($v);
+        
         // IP PORT HOSTNAME
         if ($a->ip == null){
             echo "### FATAL ERROR MEIGOAPI v5.0 | CODE ERROR: 100\n";
@@ -185,7 +186,7 @@ class AppModule extends AbstractModule
         // IP PORT HOSTNAME
         
         // Protocol , protocol name, version 
-        echo "Protocol: ".$a->protocol_name." (".$a->protocol.") [".$a->version."]\n";
+        echo "Protocol: ".$a->protocol->name." (".$a->protocol->version.") [".$a->version."]\n";
         
         // Players
         echo "Players: ".$a->players->online."/".$a->players->max."\n";
@@ -202,7 +203,11 @@ class AppModule extends AbstractModule
     
     function bedrock($ip){
         // Java Request
-        $a = json_decode(file_get_contents("http://api.mgo.lol/meigoapi/50/bedrock.php?ip=".$ip));
+        $url = "https://api.mcsrvstat.us/bedrock/3/".$ip;
+        
+        $ch = curl_init($url);
+        $v = curl_exec($ch);
+        $a = json_decode($v);
         echo "IP: ".$a->ip." (Port: ".$a->port.") ";
         if ($a->hostname != null){
             echo "[".$a->hostname."]";
